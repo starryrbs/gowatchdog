@@ -9,6 +9,7 @@ import (
 
 	"github.com/starryrbs/watchdog/internal/checker"
 	"github.com/starryrbs/watchdog/internal/redis"
+	"github.com/starryrbs/watchdog/internal/website"
 	"github.com/starryrbs/watchdog/internal/zookeeper"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v3"
@@ -17,6 +18,7 @@ import (
 type Config struct {
 	Redis     *redis.Config
 	Zookeeper *zookeeper.Config
+	Website   *website.Config
 	Interval  time.Duration
 }
 
@@ -81,6 +83,14 @@ func main() {
 		go func() {
 			defer wg.Done()
 			RunChecker(redis.NewChecker(config.Redis, logger), logger, config)
+		}()
+	}
+
+	if config.Website != nil {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			RunChecker(website.NewChecker(config.Website, logger), logger, config)
 		}()
 	}
 
