@@ -1,0 +1,24 @@
+# Redis 配置
+redis:
+  addr: "127.0.0.1:6379"         # Redis 服务器地址，替换为您的 Redis 服务器地址
+  password: ""                   # Redis 密码（如果没有密码，则留空）
+  db: 0                          # Redis 数据库编号
+  timeout: 5s                     # 连接 Redis 的超时时间，单位为秒
+
+# Zookeeper 配置
+zookeeper:
+  hosts:
+    - "127.0.0.1:2181"           # Zookeeper 主机地址和端口，替换为您的 Zookeeper 节点地址
+    - "127.0.0.1:2182"           # 如果有多个节点，可以依次列出
+    - "127.0.0.1:2183"           # 如果有多个节点，可以依次列出
+  timeout: 5s                     # 会话超时时间，单位为秒
+
+# 网站配置
+website:
+  urls:
+    - "https://example1.com"     # 网站 URL 列表，替换为实际的 URLs
+    - "https://example2.com"
+    - "https://example3.com"
+
+# 配置检查间隔时间
+interval: 100ms                   # 检查的时间间隔，单位为毫秒
